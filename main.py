@@ -11,9 +11,7 @@ import segmentation_models_pytorch as smp
 
 device = torch.device("cuda")
 
-# -------------------------
 # 1. Dataset
-# -------------------------
 
 image_paths = [
     f"data/images/PATIENT_{i}.jpg" if i in (5, 6, 7) else f"data/images/PATIENT_{i}.tif"
@@ -51,9 +49,8 @@ cardiac = [
 ]
 
 
-# -------------------------
 # 1.1 Data Augmentation
-# -------------------------
+
 train_transform = A.Compose([
     A.HorizontalFlip(p=0.5),
     A.Rotate(limit=15, p=0.5),
@@ -88,9 +85,7 @@ test_loader = DataLoader(
 )
 
 
-# -------------------------
 # 2. Model
-# -------------------------
 
 model = smp.Unet(
     encoder_name="resnet34",
@@ -100,9 +95,7 @@ model = smp.Unet(
 ).to(device)
 
 
-# -------------------------
 # 3. Loss function
-# -------------------------
 
 def dice_loss(prediction, target):
 
@@ -144,18 +137,18 @@ def dice_score(prediction, target):
 
 bce = nn.BCEWithLogitsLoss()
 
-# -------------------------
+
 # 4. Optimizer
-# -------------------------
+
 
 optimizer = torch.optim.Adam(
     model.parameters(),
     lr=0.001
 )
 
-# =====================
+
 # TRAIN
-# =====================
+
 
 best_dice = 0.0
 epochs = 80
@@ -189,9 +182,9 @@ for epoch in range(epochs):
     train_loss /= len(train_loader)
 
 
-    # =====================
+
     # VALIDATION
-    # =====================
+
 
     model.eval()
 
@@ -230,7 +223,7 @@ for epoch in range(epochs):
             "best_model.pth"
         )
 
-        print("  ⭐ New best model saved!")
+        print(" New best model found")
 
     print(
         f"Epoch {epoch + 1}/{epochs} | "
@@ -240,9 +233,9 @@ for epoch in range(epochs):
     )
 
 
-# =====================
+
 # TEST
-# =====================
+
  
 model.load_state_dict(
     torch.load("best_model.pth", map_location=device)
@@ -297,9 +290,9 @@ torch.save(
 
 
 
-# =====================
+
 # VISUALISE
-# =====================
+
 
 # Take one image from the dataset
 # image, mask = test[0]

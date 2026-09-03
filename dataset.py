@@ -18,33 +18,33 @@ class MRIDataset(Dataset):
 
     def __getitem__(self, index):
 
-        # Load MRI
+        # Loading MRI
         image = np.array(
             Image.open(self.image_paths[index])
         )
 
-        # Load Otsu mask
+        # Loading Otsu mask
         mask = np.array(
             Image.open(self.mask_paths[index])
         )
 
-        # Normalize MRI
+        # Normalizing MRI
         image = image.astype(np.float32) / 255.0
 
-        # Convert mask from 0/255 to 0/1
+        # Converting from 0/255 to 0/1
         mask = mask.astype(np.float32) / 255.0
 
-        # Apply augmentation (image and mask together, same random transform)
+        # Data Augmentation 
         if self.transform is not None:
             augmented = self.transform(image=image, mask=mask)
             image = augmented["image"]
             mask = augmented["mask"]
 
-        # Convert to PyTorch tensors
+        # Converting to PyTorch tensors
         image = torch.tensor(image)
         mask = torch.tensor(mask)
 
-        # Add channel dimension
+        # Adding dimension
         image = image.unsqueeze(0)
         mask = mask.unsqueeze(0)
 

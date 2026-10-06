@@ -309,13 +309,13 @@ image_paths = [
 ]
 
 images = [
-    Image.open(path).convert('L')   # keep as PIL Image, don't np.array() yet
+    Image.open(path).convert('L')   
     for path in image_paths
 ]
 
 for i in range(len(images)):
     images[i] = transform(images[i]).unsqueeze(0).to(device)
-    # transform() includes ToTensor(), so this now correctly becomes a tensor
+  
 
 
 

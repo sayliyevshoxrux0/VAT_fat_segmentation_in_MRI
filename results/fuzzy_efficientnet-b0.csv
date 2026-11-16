@@ -1,0 +1,7 @@
+arch,seed,severity,test_dice
+efficientnet-b0,0,0,0.8543496012687684
+efficientnet-b0,0,4,0.8351409375667572
+efficientnet-b0,1,0,0.826683521270752
+efficientnet-b0,1,4,0.8655429720878601
+efficientnet-b0,2,0,0.8669127523899078
+efficientnet-b0,2,4,0.8596092760562897

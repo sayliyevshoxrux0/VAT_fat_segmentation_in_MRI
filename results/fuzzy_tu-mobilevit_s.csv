@@ -1,0 +1,7 @@
+arch,seed,severity,test_dice
+tu-mobilevit_s,0,0,0.8553518354892731
+tu-mobilevit_s,0,4,0.8639231264591217
+tu-mobilevit_s,1,0,0.8741203486919403
+tu-mobilevit_s,1,4,0.8490713775157929
+tu-mobilevit_s,2,0,0.8872646510601043
+tu-mobilevit_s,2,4,0.8923678040504456
